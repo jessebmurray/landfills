@@ -13074,20 +13074,12 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">landfill_0</span> <span class="k">as</span> <span class="nn">lf</span>
-<span class="kn">import</span> <span class="nn">imp</span> 
-<span class="n">imp</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">lf</span><span class="p">)</span>
-</pre></div>
-
-    </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Modeling-the-growth-of-non-decomposed-municipal-solid-waste-in-US-landfills">Modeling the growth of non-decomposed municipal solid waste in US landfills<a class="anchor-link" href="#Modeling-the-growth-of-non-decomposed-municipal-solid-waste-in-US-landfills">&#182;</a></h1>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13100,9 +13092,12 @@ Figure 1. The totals across all named MSW materials landfilled in the United Sta
 for each of the available years from 1960 to 2017. Unnamed ‘other’ materials of MSW representing less than 5% of total MSW landfill additions are not included in the totals shown here. [2]</p>
 <p><img src="landfills_images/epa_per_capita1.png">
 Figure 2. The amount of MSW generated per person per year in the United States for each of the available years from 1960 to 2017. [1]</p>
-<p>The precise decomposition functions over time for each of the MSW materials is either not generally known or has a high degree of uncertainty. There is evidence that the decomposition of plastics follows a function similar to an exponential decay with a steep negative slope early on that gradually flattens while still remaining negative [7]. However, it is not generally known what the decomposition functions are for other MSW materials. Exponential decay, which results from the decay rate being directly proportional to the amount of material, seems to be the most elemental function of decomposition without being over simplistic:
-dN/dt= -kN<br>
-If exponential decay is the best estimate under uncertainty for the structure of the decomposition functions for each of the MSW materials, it remains to be known what the decay constant, k is for the various MSW materials. These can be estimated using the decomposition times provided by a variety of sources. Estimates for the decomposition times of food, rubber and leather, textiles, aluminum, and glass can be obtained from the Mote Marine Lab [4]. An estimate for the decomposition time of paper in landfills is provided by Ximenes [5]. An estimate for the decomposition time of wood products in landfills can be calculated by the measured loss of wood products’ original carbon content in landfills provided by Ximenes et al. [6]. Commonly quoted decomposition times and estimates based on similar materials can be used for yard trimmings, steel, and plastic. Because exponential decay functions never reach zero, there must be a declared 'percent remaining' at the point of the decomposition time. Here, I use the relatively conservative number of 5%. That is, at the decompsition time for the MSW material, 5% is still remaining to decompose. The decomposition functions are likely the greatest source of uncertainty in any model of non-decomposed MSW material in landfills over time.</p>
+<p>The precise decomposition functions over time for each of the MSW materials is either not generally known or has a high degree of uncertainty. There is evidence that the decomposition of plastics follows a function similar to an exponential decay with a steep negative slope early on that gradually flattens while still remaining negative [7]. However, it is not generally known what the decomposition functions are for other MSW materials. Exponential decay, which results from the decay rate being directly proportional to the amount of material, seems to be the most elemental function of decomposition without being over simplistic:</p>
+$$\frac{dN}{dt} = -kN$$
+<pre><code>                                           
+
+</code></pre>
+<p>If exponential decay is the best estimate under uncertainty for the structure of the decomposition functions for each of the MSW materials, it remains to be known what the decay constant, k is for the various MSW materials. These can be estimated using the decomposition times provided by a variety of sources. Estimates for the decomposition times of food, rubber and leather, textiles, aluminum, and glass can be obtained from the Mote Marine Lab [4]. An estimate for the decomposition time of paper in landfills is provided by Ximenes [5]. An estimate for the decomposition time of wood products in landfills can be calculated by the measured loss of wood products’ original carbon content in landfills provided by Ximenes et al. [6]. Commonly quoted decomposition times and estimates based on similar materials can be used for yard trimmings, steel, and plastic. Because exponential decay functions never reach zero, there must be a declared 'percent remaining' at the point of the decomposition time. Here, I use the relatively conservative number of 5%. That is, at the decompsition time for the MSW material, 5% is still remaining to decompose. The decomposition functions are likely the greatest source of uncertainty in any model of non-decomposed MSW material in landfills over time.</p>
 <p>The densities of certain baled or compressed MSW materials can be obtained from the volume to weight conversions provided by the EPA [8]. Estimates of the density of wood in landfills is provided by Ximenes et al. [6]. For other MSW materials such as rubber and leather, and glass, densities can be obtained from the standard widely available measurements. In some cases, the volume to weight conversions provided by the EPA are only available for a limited number of instances of a MSW material. For example, baled aluminum cans is the only provided density by the EPA of the MSW material aluminum. In those cases, an average can be made between the standard widely available density of that MSW material and the EPA provided density. This is required for steel and aluminum, which have limited measurements provided by the EPA. An average of the MSW material densities - weighted by the amount of their most recent annual landfill - can be compared to the overall density of MSW material provided by the EPA in order to verify its reliability.</p>
 <p>Mean landfill depth in the United States can be obtained from the median depth of the 2,549 landfills in the EPA’s Landfill Methane Outreach Program (LMOP) database. While the LMOP database does not contain information on every landfill in the United States, it is the most comprehensive dataset available. The medians for the current and design landfill depth are 24.1 and 25.9 meters, respectively. The 25th and 75th percentiles are 15.2 and 33.4 meters for the current landfill depth, and 16.8 and 39.6 meters for the design landfill depth [9].</p>
 <p>The goal here is to present the results of creating model using the inputs described above to simulate the growth in the total amount of decomposed and non-decomposed material in landfills in the United States over time. The model constructed uses the specific inputs described above but can accommodate any decomposition function for each  MSW material (not only exponential decay), and can accommodate any function over time for the annual additions of each MSW material. It is important to note that such a model can be applied to landfills for other nations or groups of nations. The model was applied to the United States because of the availability and reliability of EPA data. While the particular simulation described here suffers from large uncertainties, especially in the decomposition functions for the MSW materials, the goal is to provide a base estimate with the most reliable data available.</p>
@@ -13124,6 +13119,19 @@ If exponential decay is the best estimate under uncertainty for the structure of
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">landfill</span> <span class="k">as</span> <span class="nn">lf</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -13213,8 +13221,7 @@ If exponential decay is the best estimate under uncertainty for the structure of
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's get the total amount of non-decomposed MSW of each material in landfills using the EPA data on annual additions from 1960 to 2017. Note that in the import file you have to change added_is_const to 'n', the import file shows clearly how to do this.</p>
-
+<h3 id="From-1960-to-2017">From 1960 to 2017<a class="anchor-link" href="#From-1960-to-2017">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -13223,13 +13230,6 @@ If exponential decay is the best estimate under uncertainty for the structure of
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This plot shows the total amount of non-decomposed MSW for each material using the real EPA data of annual additions from 1960 to 2017, and the decomposition functions described earlier. The MSW types are ordered from most to least at the end, thus, the MSW type with the most amount of non-decomposed material in US landfills is plastic, the MSW type with the least is yard trimmings.</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="From-1960-to-2017">From 1960 to 2017<a class="anchor-link" href="#From-1960-to-2017">&#182;</a></h3>
 </div>
 </div>
 </div>
