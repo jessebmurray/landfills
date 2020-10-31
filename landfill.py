@@ -640,6 +640,9 @@ def bar_chart_list(in_list, type_nums_to_exclude=(), Sorted=False, logarithmic=T
     elif in_list == decomp_times:
         list_type = 'decomp_times'
         calculation = 'na'
+    elif in_list == densities:
+        list_type = 'densities'
+        calculation = 'na'
     else:
         calculation = in_list[0][0]
         list_type = in_list[0][1]
@@ -697,15 +700,18 @@ def bar_chart_list(in_list, type_nums_to_exclude=(), Sorted=False, logarithmic=T
                 plt.text(a, b, f'{int(b + 0.5):,}', ha='center', va='bottom', size=11)
 
     # make logarithmic
-    if logarithmic is True:
-        if in_list != added_amounts:
-            plt.yscale('log')
+    # if logarithmic is True:
+    #     if in_list != added_amounts:
+    #         plt.yscale('log')
 
     # make y_labels
     if in_list == decomp_times:
         plt.ylabel('Years')
     elif in_list == added_amounts:
         plt.ylabel('Million Metric Tons')
+    elif in_list == densities:
+        plt.ylabel('Metric tons / $m^3$')
+
     else:
         if list_type == 'steady_state_amounts':
             if calculation == 'mass':
@@ -718,21 +724,23 @@ def bar_chart_list(in_list, type_nums_to_exclude=(), Sorted=False, logarithmic=T
             plt.ylabel('Year')
 
     # make titles
-    if in_list == decomp_times:
-        plt.title('Years to Decompose')
-    elif in_list == added_amounts:
-        plt.title('Amount Added to Landfills in 2017')
-    else:
-        if list_type == 'steady_state_amounts':
-            plt.title('Amount of Non-Decomposed Landfill Material At Steady State')
-        elif list_type == 'steady_state_years':
-            plt.title('Year at Steady State')
+    # if in_list == decomp_times:
+    #     pass
+    #    #  plt.title('Years to Decompose')
+    # elif in_list == added_amounts:
+    #     pass
+    #    # plt.title('Amount of each MSW type landfilled in 2017')
+    # else:
+    #     if list_type == 'steady_state_amounts':
+    #         plt.title('Amount of Non-Decomposed Landfill Material At Steady State')
+    #     elif list_type == 'steady_state_years':
+    #         plt.title('Year at Steady State')
 
     # save
     if save is True:
         name = graphs_location + list_type + '.png'
         plt.savefig(name, dpi=300)
-    plt.show()
+    #plt.show()
 
 
 # NOT USED ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
